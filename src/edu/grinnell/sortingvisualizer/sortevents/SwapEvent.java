@@ -7,7 +7,7 @@ public class SwapEvent<T> implements SortEvent<T> {
 
   int i;
   int j;
-  List<Integer> indices;
+  List<Integer> indices = new ArrayList<Integer>();
 
   public SwapEvent(int pos1, int pos2) {
     this.i = pos1;

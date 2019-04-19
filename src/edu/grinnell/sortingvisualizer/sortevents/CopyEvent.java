@@ -7,7 +7,7 @@ public class CopyEvent<T> implements SortEvent<T> {
 
   int pos;
   T val;
-  List<Integer> indices;
+  List<Integer> indices = new ArrayList<Integer>();
 
   public CopyEvent(T value, int index) {
     this.pos = index;

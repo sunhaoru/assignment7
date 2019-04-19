@@ -29,19 +29,19 @@ public class Sorts {
    * @param arr
    * @return
    */
-  @SuppressWarnings({"null", "unchecked", "rawtypes"})
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static <T extends Comparable<T>> List<SortEvent<T>> bubbleSort(T[] arr) {
     if (arr == null) {
       throw new IllegalStateException();
     } // if
 
-    List<SortEvent<T>> events = null;
+    List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
     for (int i = arr.length - 1; i > 0; i--) {
       for (int j = 0; j < i; j++) {
         events.add(new CompareEvent(j, j + 1));
-        if (arr[j].compareTo(arr[j + 1]) < 0) {
+        if (arr[j].compareTo(arr[j + 1]) > 0) {
           events.add(new SwapEvent(j, j + 1));
-          swap(arr, j, j + 1);
+          swap(arr, j + 1, j);
         }
       } // for (j)
     } // for (i)
@@ -54,28 +54,29 @@ public class Sorts {
    * @param arr
    * @return
    */
-  @SuppressWarnings({"rawtypes", "unchecked", "null"})
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public static <T extends Comparable<T>> List<SortEvent<T>> insertionSort(T[] arr) {
     if (arr == null) {
       throw new IllegalStateException();
     } // if
-    List<SortEvent<T>> events = null;
-    int pos = 1;
-    T temp;
-    while (pos < arr.length) {
-      temp = arr[pos];
-      int index = 0;
-      while (index < pos && arr[index].compareTo(arr[pos]) <= 0) {
-        events.add(new CompareEvent(index, pos));
-        index++;
-      } // while
-      for (int i = pos; i > index; i--) {
-        arr[i] = arr[i - 1];
-        events.add(new CopyEvent(i, i - 1));
+    List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
+    for (int i = 1; i < arr.length; i++) {
+      T temp = arr[i];
+      int min_pos = i;
+      for (int j = i - 1; j >= 0; j--) {
+        if (arr[i].compareTo(arr[j]) < 0) {
+          events.add(new CompareEvent(j, i));
+          min_pos = j;
+        } // if
       } // for
-      arr[index] = temp;
-      pos++;
-    } // while
+      for (int k = i; k > min_pos; k--) {
+        arr[k] = arr[k - 1];
+        T value = arr[k - 1];
+        events.add(new CopyEvent(value, k));
+      } // for
+      arr[min_pos] = temp;
+      events.add(new CopyEvent(temp, min_pos));
+    } // for
     return events;
   }// insertionSort();
 
@@ -85,20 +86,20 @@ public class Sorts {
    * @param arr
    * @return
    */
-  @SuppressWarnings({"null", "rawtypes", "unchecked"})
+  @SuppressWarnings({"rawtypes", "unchecked"})
   public static <T extends Comparable<T>> List<SortEvent<T>> selectionSort(T[] arr) {
     if (arr == null) {
       throw new IllegalStateException();
     } // if
 
-    List<SortEvent<T>> events = null;
+    List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
     for (int i = 0; i < arr.length; i++) {
-      int j = i;
+      int j = i + 1;
       int index = i;
       while (j < arr.length) {
         if (arr[j].compareTo(arr[index]) <= 0) {
-          index = j;
           events.add(new CompareEvent(j, index));
+          index = j;
         } // if
         j++;
       } // while
@@ -116,7 +117,7 @@ public class Sorts {
    * @return
    */
   public static <T extends Comparable<T>> List<SortEvent<T>> quickSort(T[] values) {
-    List<SortEvent<T>> events = null;
+    List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
     quickSortHelper(values, 0, values.length, events);
     return events;
   } // quickSort()
@@ -171,7 +172,7 @@ public class Sorts {
    * @return
    */
   public static <T extends Comparable<T>> List<SortEvent<T>> mergeSort(T[] values) {
-    List<SortEvent<T>> events = null;
+    List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
     mergeSortHelper(values, 0, values.length, events);
     return events;
   } // mergeSort(T[] values)

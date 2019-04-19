@@ -1,5 +1,9 @@
 package edu.grinnell.sortingvisualizer;
 
+import java.util.*;
+
+// Citation: https://stackoverflow.com/questions/1519736/random-shuffling-of-an-array
+
 /**
  * A collection of indices into a Scale object. These indices are the subject of the various sorting
  * algorithms in the program.
@@ -28,8 +32,19 @@ public class NoteIndices {
    * @param n the size of the scale object that these indices map into
    */
   public void initializeAndShuffle(int n) {
-    // TODO: fill me in
-  }
+    // Reinitialize with give size n
+    this.notes = new Integer[n];
+    this.highlights = new Boolean[n];
+    for (int i = 0; i < n; i++) {
+      highlights[i] = false;
+    } // for
+    // Map the values
+    for (int i = 0; i < n; i++) {
+      this.notes[i] = i;
+    } // for
+    // Shuffle
+    shuffleArray(this.notes);
+  }// initializeAndShuffle
 
   /** @return the indices of this NoteIndices object */
   public Integer[] getNotes() {
@@ -57,4 +72,21 @@ public class NoteIndices {
       i = false;
     } // for
   }// clearAllHighlighted()
+
+  /**
+   * shuffleArray
+   * 
+   * @author Dan Bray
+   * @param notes2
+   */
+  private static void shuffleArray(Integer[] notes) {
+    int index, temp;
+    Random random = new Random();
+    for (int i = notes.length - 1; i > 0; i--) {
+      index = random.nextInt(i + 1);
+      temp = notes[index];
+      notes[index] = notes[i];
+      notes[i] = temp;
+    } // for
+  }// shuffleArray
 }

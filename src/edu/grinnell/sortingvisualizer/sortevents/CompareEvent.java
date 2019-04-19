@@ -7,7 +7,7 @@ public class CompareEvent<T> implements SortEvent<T> {
 
   int i;
   int j;
-  List<Integer> indices;
+  List<Integer> indices = new ArrayList<Integer>();
 
   public CompareEvent(int pos1, int pos2) {
     this.i = pos1;
@@ -27,7 +27,7 @@ public class CompareEvent<T> implements SortEvent<T> {
   }// isEmphasized()
 
   /**
-   * apply does nothing to l
+   * apply does nothing to arr
    * 
    * @param l ArrayList<T>
    */
