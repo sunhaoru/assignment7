@@ -1,4 +1,4 @@
-package edu.grinnell.sortingvisualizer;
+package edu.grinnell.sortingvisualizer.rendering;
 
 // Citation:
 // https://stackoverflow.com/questions/29873878/creating-a-simple-bar-chart-in-java-reads-data-and-outputs-bar-graph
@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import edu.grinnell.sortingvisualizer.audio.NoteIndices;
 
 @SuppressWarnings("serial")
 public class ArrayPanel extends JPanel {

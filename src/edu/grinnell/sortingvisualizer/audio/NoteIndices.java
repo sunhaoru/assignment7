@@ -1,4 +1,4 @@
-package edu.grinnell.sortingvisualizer;
+package edu.grinnell.sortingvisualizer.audio;
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class NoteIndices {
 
-  Integer[] notes;
+  public Integer[] notes;
   Boolean[] highlights;
 
   /**
