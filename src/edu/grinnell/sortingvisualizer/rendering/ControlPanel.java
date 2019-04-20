@@ -3,8 +3,6 @@ package edu.grinnell.sortingvisualizer.rendering;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -120,7 +118,7 @@ public class ControlPanel extends JPanel {
           scale = generateScale((String) scales.getSelectedItem());
           notes.initializeAndShuffle(scale.size());
           ControlPanel.this.panel.repaint();
-        }
+        } // if
       }
     });
     add(makeScaleButton);
@@ -132,12 +130,9 @@ public class ControlPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         if (isSorting) {
           return;
-        }
+        } // if
         isSorting = true;
 
-        // TODO: fill me in
-        // 1. Create the sorting events list
-        // 2. Add in the compare events to the end of the list
         Integer[] notesCopy = notes.notes.clone();
         List<SortEvent<Integer>> events =
             generateEvents(sorts.getSelectedItem().toString(), notesCopy);
@@ -165,17 +160,16 @@ public class ControlPanel extends JPanel {
           public void run() {
             if (index < events.size()) {
               SortEvent<Integer> e = events.get(index++);
-              // TODO: fill me in
-              // 1. Apply the next sort event.
-              // 3. Play the corresponding notes denoted by the
-              // affected indices logged in the event.
-              // 4. Highlight those affected indices.
+
               e.apply(notes.notes);
               List<Integer> pos = e.getAffectedIndices();
               for (Integer i : pos) {
+                if (e.isEmphasized()) {
+                  notes.highlightNote(i);
+                } // if e isEmphasized
                 scale.playNote(i, notes.isHighlighted(i));
               } // for
-              panel.repaint();
+              panel.repaint();// reprint the graph
             } else {
               this.cancel();
               panel.repaint();

@@ -9,6 +9,9 @@ import edu.grinnell.sortingvisualizer.sortevents.SwapEvent;
 
 public class Sorts {
 
+  // +-----------+---------------------------------------------------------
+  // | eventSort |
+  // +-----------+
   /**
    * sortEvent
    * 
@@ -23,11 +26,14 @@ public class Sorts {
     } // for()
   }// sortEvent()
 
+  // +------------+---------------------------------------------------------
+  // | bubbleSort |
+  // +------------+
   /**
    * bubbleSort
    * 
    * @param arr
-   * @return
+   * @return events
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static <T extends Comparable<T>> List<SortEvent<T>> bubbleSort(T[] arr) {
@@ -48,6 +54,9 @@ public class Sorts {
     return events;
   }// bubbleSort()
 
+  // +---------------+-------------------------------------------------------
+  // | insertionSort |
+  // +---------------+
   /**
    * insertionSort
    * 
@@ -80,11 +89,14 @@ public class Sorts {
     return events;
   }// insertionSort();
 
+  // +---------------+-------------------------------------------------------
+  // | selectionSort |
+  // +---------------+
   /**
    * selectionSort
    * 
    * @param arr
-   * @return
+   * @return events
    */
   @SuppressWarnings({"rawtypes", "unchecked"})
   public static <T extends Comparable<T>> List<SortEvent<T>> selectionSort(T[] arr) {
@@ -109,12 +121,14 @@ public class Sorts {
     return events;
   }// selectionSort();
 
-
+  // +-----------+-----------------------------------------------------------
+  // | quickSort |
+  // +-----------+
   /**
    * quickSort
    * 
    * @param values
-   * @return
+   * @return events
    */
   public static <T extends Comparable<T>> List<SortEvent<T>> quickSort(T[] values) {
     List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
@@ -164,12 +178,14 @@ public class Sorts {
     quickSortHelper(values, b, ub, events);
   } // quickSortHelper()
 
-
+  // +-----------+-----------------------------------------------------------
+  // | mergeSort |
+  // +-----------+
   /**
    * mergeSort
    * 
    * @param values
-   * @return
+   * @return events
    */
   public static <T extends Comparable<T>> List<SortEvent<T>> mergeSort(T[] values) {
     List<SortEvent<T>> events = new ArrayList<SortEvent<T>>();
@@ -206,12 +222,10 @@ public class Sorts {
       }
     } // while
     while (i < mid) {
-      events.add(new CompareEvent(i, mid));
       spare[k++] = values[i];
       i++;
     } // while i
     while (j < ub) {
-      events.add(new CompareEvent(j, ub));
       spare[k++] = values[j];
       j++;
     } // while j
@@ -225,7 +239,9 @@ public class Sorts {
 
 
 
-  // Helper
+  // +--------+-----------------------------------------------------------
+  // | helper |
+  // +--------+
   /**
    * swap
    * 

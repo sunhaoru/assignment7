@@ -24,28 +24,36 @@ public class ArrayPanel extends JPanel {
   public ArrayPanel(NoteIndices notes, int width, int height) {
     this.notes = notes;
     this.setPreferredSize(new Dimension(width, height));
-  }
+  }// ArrayPanel()
 
+  /**
+   * Constructs a new bar graph for notes
+   * 
+   * @param g Graphics
+   */
   @Override
   public void paintComponent(Graphics g) {
     Dimension di = this.getPreferredSize();
     g.setColor(Color.white);
     g.fillRect(0, 0, di.width, di.height);
-    // Calculate the width of the bar width
     int len = this.notes.notes.length;
-    int barWidth = di.width / len;
+    int barWidth = di.width / len;// Calculate the width of the bar width
     // Find the maximum value of the notes
     int max = this.notes.notes[0];
     for (Integer i : this.notes.notes) {
       if (max < i) {
         max = i;
-      }
+      } // if
     } // for
-    g.setColor(Color.blue);
     for (int itemIndex = 0; itemIndex < len; itemIndex++) {
+      g.setColor(new Color(100, 200, 255, 180));
+      if (notes.isHighlighted(itemIndex)) {
+        g.setColor(new Color(200, 50, 50, 200));
+      } // if isHighlighted
       int barHight = this.notes.notes[itemIndex] * di.height / max;
       g.fillRect(itemIndex * barWidth, di.height - barHight, barWidth, barHight);
     } // for
+    notes.clearAllHighlighted();
   }// paintComponent()
 }
 

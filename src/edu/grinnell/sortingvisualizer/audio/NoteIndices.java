@@ -10,9 +10,16 @@ import java.util.*;
  */
 public class NoteIndices {
 
+  // +--------+------------------------------------------------------------
+  // | Fields |
+  // +--------+
+
   public Integer[] notes;
   Boolean[] highlights;
 
+  // +--------------+------------------------------------------------------
+  // | Constructors |
+  // +--------------+
   /**
    * @param n the size of the scale object that these indices map into
    */
@@ -25,6 +32,9 @@ public class NoteIndices {
     } // for
   }// Constructor
 
+  // +---------+-----------------------------------------------------------
+  // | Methods |
+  // +---------+
   /**
    * Reinitializes this collection of indices to map into a new scale object of the given size. The
    * collection is also shuffled to provide an initial starting point for the sorting process.
@@ -67,9 +77,8 @@ public class NoteIndices {
 
   /** Clears all highlighted indices from this collection */
   public void clearAllHighlighted() {
-    for (@SuppressWarnings("unused")
-    Boolean i : highlights) {
-      i = false;
+    for (int i = 0; i < this.highlights.length; i++) {
+      this.highlights[i] = false;
     } // for
   }// clearAllHighlighted()
 
